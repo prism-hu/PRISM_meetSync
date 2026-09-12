@@ -447,6 +447,14 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:18px 0}
           <button class="btn btn-primary" onclick="saveSlackWebhook()">保存</button>
           <button class="btn btn-outline" onclick="testSlackWebhook()">テスト送信</button>
         </div>
+        <div class="form-row" style="margin-top:16px"><label>回答通知（DM用）Webhook URL</label>
+          <input type="text" id="sys-slack-dm-webhook" placeholder="https://hooks.slack.com/services/..." style="width:100%">
+          <p class="text-sm text-muted" style="margin-top:4px">参加者が出欠を回答・空き時間を入力したときに通知します。<strong>自分へのDM宛てに作成した Webhook</strong> を登録してください。空欄なら回答通知は送られません。</p></div>
+        <div id="sys-slack-dm-msg" style="margin-top:8px"></div>
+        <div class="mt-4" style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="saveSlackDmWebhook()">保存</button>
+          <button class="btn btn-outline" onclick="testSlackDmWebhook()">テスト送信</button>
+        </div>
       </div>
     </div>
   </div>
@@ -844,8 +852,10 @@ function submitVote(){var rows=document.querySelectorAll('#v-date-grid .date-row
 function loadAdminData(){show('loading');google.script.run.withSuccessHandler(function(data){if(!renderAdminList(data))return;if(gCurrentMeetingId)loadAdminMeetingDetail(gCurrentMeetingId,false);else{clearAdminDetail_();hideLoading();fetchNotifications();}}).withFailureHandler(function(err){hideLoading();showError((err&&err.message)||'\u7ba1\u7406\u8005\u30c7\u30fc\u30bf\u306e\u53d6\u5f97\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002');}).getAdminMeetingList(ADMIN_TOKEN);}
 function loadAdminMeetingDetail(id,showSpinner){if(!id)return;if(showSpinner!==false)show('loading');google.script.run.withSuccessHandler(function(data){renderAdminDetail(data);fetchNotifications();}).withFailureHandler(function(err){hideLoading();showError((err&&err.message)||'\u4f1a\u8b70\u8a73\u7d30\u306e\u53d6\u5f97\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002');}).getAdminMeetingDetail(ADMIN_TOKEN,id);}
 function showTopTab(name){gCurrentTopTab=name;var tabs=document.querySelectorAll('#admin-top-tabs .top-tab-btn');tabs.forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.top-tab-content').forEach(function(c){c.classList.remove('active');});if(name==='meetings'){tabs[0].classList.add('active');el('top-tab-meetings').classList.add('active');}else if(name==='templates'){tabs[1].classList.add('active');el('top-tab-templates').classList.add('active');loadTemplates();}else if(name==='system'){tabs[2].classList.add('active');el('top-tab-system').classList.add('active');loadSlackConfig();}}
-function loadSlackConfig(){google.script.run.withSuccessHandler(function(r){if(!r||!r.ok)return;var x=el('sys-slack-webhook');if(x)x.value=r.webhookUrl||'';gSlackDefaultTemplate=r.defaultTemplate||'';}).withFailureHandler(function(){}).adminGetSlackConfig(ADMIN_TOKEN);}
+function loadSlackConfig(){google.script.run.withSuccessHandler(function(r){if(!r||!r.ok)return;var x=el('sys-slack-webhook');if(x)x.value=r.webhookUrl||'';var xd=el('sys-slack-dm-webhook');if(xd)xd.value=r.dmWebhookUrl||'';gSlackDefaultTemplate=r.defaultTemplate||'';}).withFailureHandler(function(){}).adminGetSlackConfig(ADMIN_TOKEN);}
 function saveSlackWebhook(){var url=(el('sys-slack-webhook')||{}).value||'';setHtml('sys-slack-msg','<div class="msg msg-info">保存中…</div>');google.script.run.withSuccessHandler(function(r){setHtml('sys-slack-msg',r&&r.ok?'<div class="msg msg-success">保存しました。</div>':'<div class="msg msg-error">保存に失敗：'+((r&&r.error)||'')+'</div>');}).withFailureHandler(function(err){setHtml('sys-slack-msg','<div class="msg msg-error">通信エラー：'+((err&&err.message)||err)+'</div>');}).adminSetSlackWebhookUrl(ADMIN_TOKEN,url.trim());}
+function saveSlackDmWebhook(){var url=(el('sys-slack-dm-webhook')||{}).value||'';setHtml('sys-slack-dm-msg','<div class="msg msg-info">保存中…</div>');google.script.run.withSuccessHandler(function(r){setHtml('sys-slack-dm-msg',r&&r.ok?'<div class="msg msg-success">保存しました。</div>':'<div class="msg msg-error">保存に失敗：'+((r&&r.error)||'')+'</div>');}).withFailureHandler(function(err){setHtml('sys-slack-dm-msg','<div class="msg msg-error">通信エラー：'+((err&&err.message)||err)+'</div>');}).adminSetSlackDmWebhookUrl(ADMIN_TOKEN,url.trim());}
+function testSlackDmWebhook(){setHtml('sys-slack-dm-msg','<div class="msg msg-info">テスト送信中…</div>');google.script.run.withSuccessHandler(function(r){setHtml('sys-slack-dm-msg',r&&r.ok?'<div class="msg msg-success">テスト通知を送信しました。Slack の DM を確認してください。</div>':'<div class="msg msg-error">失敗：'+((r&&r.error)||'')+'</div>');}).withFailureHandler(function(err){setHtml('sys-slack-dm-msg','<div class="msg msg-error">通信エラー：'+((err&&err.message)||err)+'</div>');}).adminTestSlackDmWebhook(ADMIN_TOKEN);}
 function testSlackWebhook(){setHtml('sys-slack-msg','<div class="msg msg-info">テスト送信中…</div>');google.script.run.withSuccessHandler(function(r){setHtml('sys-slack-msg',r&&r.ok?'<div class="msg msg-success">テスト通知を送信しました。Slack を確認してください。</div>':'<div class="msg msg-error">失敗：'+((r&&r.error)||'')+'</div>');}).withFailureHandler(function(err){setHtml('sys-slack-msg','<div class="msg msg-error">通信エラー：'+((err&&err.message)||err)+'</div>');}).adminTestSlackWebhook(ADMIN_TOKEN);}
 
 /* Notifications */
