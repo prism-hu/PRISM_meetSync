@@ -258,6 +258,65 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:18px 0}
 .tmpl-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px}
 .tmpl-modal{background:#fff;border-radius:14px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;padding:28px 24px;box-shadow:0 12px 40px rgba(0,0,0,.2)}
 .tmpl-modal h2{font-size:1.05rem;margin-bottom:16px;color:var(--blue)}
+/* ===== 先生向けページ（pv-） ===== */
+.pv{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.pv-hero,.pv-card{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 10px 30px rgba(15,61,110,.08)}
+.pv-who{font-size:1.15rem;font-weight:700;margin:0}
+.pv-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:6px;color:var(--gray);font-size:.86rem}
+.pv-chip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;font-size:.74rem;font-weight:700;letter-spacing:.04em}
+.pv-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pv-chip-green{background:var(--green-lt);color:var(--green)}
+.pv-chip-blue{background:var(--blue-lt);color:var(--blue)}
+.pv-chip-blue::before{animation:pulse 1.4s ease-in-out infinite}
+.pv-chip-amber{background:var(--amber-lt);color:var(--amber)}
+.pv-chip-gray{background:var(--gray-lt);color:var(--gray);border:1px solid var(--border)}
+@media (prefers-reduced-motion:reduce){.pv-chip-blue::before,.badge-progress .badge-dot{animation:none}}
+.pv-eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin:0 0 10px;font-weight:700}
+.pv-lead{font-size:1.02rem;font-weight:700;margin:0 0 4px;line-height:1.6}
+.pv-sub{color:var(--gray);font-size:.9rem;margin:0;line-height:1.7}
+.pv-date{display:grid;grid-template-columns:112px 1fr;gap:18px;align-items:stretch;margin-top:14px}
+.pv-cal{background:var(--blue-lt);border-radius:12px;text-align:center;padding:12px 8px 10px;display:flex;flex-direction:column;justify-content:center}
+.pv-cal .m{font-size:.8rem;font-weight:700;color:var(--blue);letter-spacing:.06em}
+.pv-cal .d{font-size:3rem;line-height:1;font-weight:900;color:var(--blue);font-variant-numeric:tabular-nums;margin:2px 0}
+.pv-cal .w{font-size:.85rem;color:var(--gray)}
+.pv-info{display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:0}
+.pv-row{display:flex;gap:10px;align-items:baseline}
+.pv-row .k{flex:0 0 3.2em;font-size:.78rem;color:var(--gray);letter-spacing:.06em}
+.pv-row .v{font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.pv-row .v.pv-v-light{font-weight:500;font-size:.9rem}
+.pv-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border-radius:10px;border:1px solid transparent;font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;line-height:1.2;transition:background .15s,opacity .15s}
+.pv-btn:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.pv-btn:disabled{opacity:.5;cursor:not-allowed}
+.pv-btn-primary{background:var(--blue);color:#fff}
+.pv-btn-primary:hover:not(:disabled){background:#163b6e}
+.pv-btn-ghost{background:#fff;color:var(--blue);border-color:var(--border)}
+.pv-btn-ghost:hover:not(:disabled){background:var(--blue-lt)}
+.pv-btn-lg{padding:13px 22px;font-size:1rem}
+.pv-notice{border-radius:10px;padding:12px 14px;font-size:.9rem;margin-top:14px}
+.pv-notice-amber{background:var(--amber-lt);color:#7c2d12;font-weight:600}
+.pv-inst{margin:14px 0 4px;font-size:.9rem;line-height:1.6}
+.pv-inst strong{display:block}
+.pv-inst span{color:var(--gray);font-size:.86rem}
+.pv-legend{display:flex;gap:14px;font-size:.82rem;font-weight:700;margin:12px 0 2px}
+.pv-files{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.pv-file{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--border);border-radius:12px}
+.pv-ic{width:38px;height:38px;border-radius:9px;background:var(--blue-lt);color:var(--blue);display:grid;place-items:center;font-size:.62rem;font-weight:900;letter-spacing:.04em}
+.pv-nm{font-weight:700;overflow-wrap:anywhere;font-size:.92rem}
+.pv-by{font-size:.78rem;color:var(--gray)}
+.pv-file-btns{display:flex;gap:6px;align-items:center}
+.pv-dl{font-size:.82rem;font-weight:700;color:var(--blue);background:none;border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.pv-dl:hover:not(:disabled){background:var(--blue-lt)}
+.pv-dl:disabled{opacity:.6;cursor:wait}
+.pv-del{background:none;border:none;cursor:pointer;color:var(--red);padding:2px 6px;font-size:1rem}
+.pv-drop{display:block;margin-top:12px;border:1.5px dashed var(--border);border-radius:12px;padding:18px 14px;text-align:center;color:var(--gray);font-size:.88rem;cursor:pointer;background:#f7f9fc;font-weight:400}
+.pv-drop b{color:var(--blue)}
+.pv-drop.over{border-color:var(--blue);background:var(--blue-lt)}
+.pv-drop-note{font-size:.78rem}
+.pv-file-input{display:none}
+.pv-empty{color:var(--gray);font-size:.9rem;margin:8px 0 0}
+.pv-foot{color:var(--gray);font-size:.8rem;text-align:center;line-height:1.7;margin:4px 0 24px}
+@media (max-width:420px){.pv-date{grid-template-columns:92px 1fr;gap:12px}.pv-cal .d{font-size:2.4rem}.pv-hero,.pv-card{padding:16px}}
 </style>
 </head>
 <body>
@@ -270,21 +329,25 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:18px 0}
 <div class="container">
   <div id="loading"><div class="spinner"></div><p>読み込み中...</p></div>
 
-  <div id="v-status" class="hidden">
-    <div class="card">
-      <div id="s-backwrap" class="hidden" style="margin-bottom:10px">
-        <button class="btn btn-outline btn-sm" onclick="backToPublicList()">← 会議一覧に戻る</button>
-      </div>
-      <div class="flex items-center justify-between flex-wrap gap-2" style="margin-bottom:14px">
-        <div id="s-badge"></div><span id="s-title" class="text-sm text-muted"></span>
-      </div>
-      <div id="s-steps"></div>
-      <div id="s-message" class="info-box info-box-blue" style="margin-top:18px"></div>
+  <div id="v-status" class="hidden pv">
+    <div id="s-backwrap" class="hidden"><button class="pv-btn pv-btn-ghost" onclick="backToPublicList()">← 会議一覧に戻る</button></div>
+    <section class="pv-hero">
+      <p class="pv-who" id="s-title"></p>
+      <div class="pv-meta"><span id="s-month"></span><span id="s-badge"></span></div>
+      <p class="pv-sub" id="s-message" style="margin-top:8px"></p>
+    </section>
+    <section class="pv-card hidden" id="s-confirmed-card">
+      <h2 class="pv-eyebrow" id="s-confirmed-eyebrow">次回の開催</h2>
       <div id="s-confirmed"></div>
+    </section>
+    <section class="pv-card">
+      <h2 class="pv-eyebrow">調整の進み具合</h2>
+      <div id="s-steps"></div>
       <div id="s-stats"></div>
-      <div id="s-vip-calendar"></div>
-      <p class="text-sm text-muted" style="margin-top:14px">回答専用URLはメールでご案内しています。</p>
-    </div>
+    </section>
+    <section id="s-vip-calendar" class="pv-card hidden"></section>
+    <section id="s-materials" class="pv-card hidden"><h2 class="pv-eyebrow">共有資料</h2><div id="s-materials-list" class="pv-files"></div></section>
+    <p class="pv-foot">回答用の専用 URL はメールでご案内しています。</p>
   </div>
 
   <div id="v-status-list" class="hidden">
@@ -295,68 +358,45 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:18px 0}
     </div>
   </div>
 
-  <div id="v-calendar" class="hidden">
-    <div class="card">
-      <h2 id="cal-greeting" style="font-size:1.05rem;margin-bottom:4px"></h2>
-      <p id="cal-subtitle" class="text-sm text-muted" style="margin-bottom:18px"></p>
-      <div id="cal-confirmed-block"></div>
-      <div id="cal-form-area">
-        <div class="info-box info-box-blue">
-          <h3 id="cal-inst-title"></h3>
-          <p id="cal-inst-body"></p>
-        </div>
+  <div id="v-participant" class="hidden pv">
+    <section class="pv-hero">
+      <p class="pv-who" id="p-who"></p>
+      <div class="pv-meta"><span id="p-title"></span><span id="p-chip"></span></div>
+    </section>
+
+    <section class="pv-card" id="p-action">
+      <h2 class="pv-eyebrow" id="p-eyebrow"></h2>
+      <div id="p-action-body"></div>
+      <div id="p-action-extra"></div>
+      <div id="cal-form-area" class="hidden">
+        <div class="pv-inst"><strong id="cal-inst-title"></strong><span id="cal-inst-body"></span></div>
         <div class="cal-legend" id="cal-legend"></div>
         <div id="cal-grid-wrap"></div>
         <p id="cal-count" class="text-sm text-muted" style="margin:8px 0"></p>
         <div id="cal-msg"></div>
-        <div class="mt-4 flex gap-2 flex-wrap">
-          <button class="btn btn-primary" id="cal-submit-btn" onclick="submitCalendar()">この内容で送信する</button>
-          <button class="btn btn-gray btn-sm" onclick="clearCalendar()">リセット</button>
+        <div class="pv-actions">
+          <button class="pv-btn pv-btn-primary pv-btn-lg" id="cal-submit-btn" onclick="submitCalendar()">この内容で送信する</button>
+          <button class="pv-btn pv-btn-ghost" onclick="clearCalendar()">リセット</button>
         </div>
       </div>
-      <div id="cal-status-msg"></div>
-      <div class="mat-area" id="cal-mat-area">
-        <h3>事前資料の共有</h3>
-        <p class="text-sm text-muted" style="margin-bottom:8px">会議前に共有したい資料があればアップロードしてください（最大35MB）。</p>
-        <div class="mat-upload-row">
-          <input type="file" id="cal-mat-file">
-          <button class="btn btn-primary btn-sm" onclick="uploadMaterialParticipant('cal')">アップロード</button>
-        </div>
-        <div id="cal-mat-msg"></div>
-        <div id="cal-mat-list" class="mat-list"></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="v-vote" class="hidden">
-    <div class="card">
-      <h2 id="v-greeting" style="font-size:1.05rem;margin-bottom:4px"></h2>
-      <p id="v-subtitle" class="text-sm text-muted" style="margin-bottom:18px"></p>
-      <div id="v-confirmed-block"></div>
       <div id="v-form-area" class="hidden">
-        <div class="info-box info-box-blue">
-          <h3>出欠のご回答をお願いいたします</h3>
-          <p id="v-deadline-msg"></p>
-        </div>
-        <p style="margin:14px 0 6px;font-size:.83rem;color:var(--gray)">
-          <strong style="color:var(--green)">○ 参加可</strong>　<strong style="color:var(--amber)">△ 未定</strong>　<strong style="color:var(--red)">× 参加不可</strong>
-        </p>
+        <div class="pv-legend"><span style="color:var(--green)">○ 参加可</span><span style="color:var(--amber)">△ 未定</span><span style="color:var(--red)">× 参加不可</span></div>
         <div class="date-grid" id="v-date-grid"></div>
         <div id="v-form-msg"></div>
-        <div class="mt-4"><button class="btn btn-primary" id="v-submit-btn" onclick="submitVote()">回答を送信する</button></div>
+        <div class="pv-actions"><button class="pv-btn pv-btn-primary pv-btn-lg" id="v-submit-btn" onclick="submitVote()">回答を送信する</button></div>
       </div>
-      <div id="v-status-msg"></div>
-      <div class="mat-area" id="v-mat-area">
-        <h3>事前資料の共有</h3>
-        <p class="text-sm text-muted" style="margin-bottom:8px">会議前に共有したい資料があればアップロードしてください（最大35MB）。</p>
-        <div class="mat-upload-row">
-          <input type="file" id="v-mat-file">
-          <button class="btn btn-primary btn-sm" onclick="uploadMaterialParticipant('v')">アップロード</button>
-        </div>
-        <div id="v-mat-msg"></div>
-        <div id="v-mat-list" class="mat-list"></div>
-      </div>
-    </div>
+    </section>
+
+    <section class="pv-card">
+      <h2 class="pv-eyebrow">事前資料</h2>
+      <p class="pv-sub">この会議の参加者が共有した資料です。共通ポータルにも表示されます。</p>
+      <div id="p-mat-list" class="pv-files"></div>
+      <div id="p-mat-msg"></div>
+      <label class="pv-drop" id="p-drop" for="p-mat-file" ondragover="onMatDragOver_(event)" ondragleave="onMatDragLeave_()" ondrop="onMatDrop_(event)">ここにファイルをドロップ、または <b>クリックして選択</b><br><span class="pv-drop-note">1 ファイル 35MB まで。あなたがアップロードした資料は削除できます。</span></label>
+      <input type="file" id="p-mat-file" class="pv-file-input" onchange="onMatFileChange_(this)">
+    </section>
+
+    <p class="pv-foot">このページはあなた専用の URL です。他の方には転送しないでください。<br>お問い合わせはメール送信元（事務局）まで。</p>
   </div>
 
   <div id="v-admin" class="hidden">
@@ -411,7 +451,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:18px 0}
       </div>
       <div class="card">
         <div class="section-title" style="margin-top:0">事前資料（Google Drive）</div>
-        <p class="text-sm text-muted" style="margin-bottom:10px">参加者がアップロードした資料の一覧です。</p>
+        <p class="text-sm text-muted" style="margin-bottom:10px">参加者がアップロードした資料の一覧です。共通ポータル（会議 ID を知っていれば誰でも閲覧可）にも表示されます。</p>
         <div id="a-materials-list" class="mat-list"></div>
         <div id="a-drive-link" class="text-sm" style="margin-top:10px"></div>
       </div>
@@ -654,43 +694,61 @@ function confirmedBlockHtml_(data,label){
 
 /* ===== Public status ===== */
 var gPublicCameFromList=false;
+var gPublicPollTimer=null;
+var gPublicMeetingId='';
 function renderStatus(data){
   hideLoading();
   if(!data||!data.ok){showError(data?data.error:'');return;}
   if(data.orgName){gOrgName=data.orgName;setText('header-org',gOrgName);}
   if(data.emailGreeting)gGreeting=data.emailGreeting;
   if(data.mode==='list'){renderPublicList(data.meetings||[]);hide('v-status');show('v-status-list');return;}
+  gPublicMeetingId=data.meetingId||'';
   var vc=parseInt(data.vipCount||'0',10);
   var vipNamesFromInfo=(data.vipInfo||[]).map(function(v){return v.name||'';});
   updateDynamicSteps(vc,vipNamesFromInfo,data.meetingMonth||'');
-  setHtml('s-badge',statusBadge(data.status));
+  var s=data.status;
+  setHtml('s-badge',publicChip_(s));
   setText('s-title',data.meetingTitle);
-  setHtml('s-steps',renderSteps8(data.status));
-  el('s-message').innerHTML='<p>'+esc(data.statusMessage)+'</p>';
-  setHtml('s-confirmed',confirmedBlockHtml_(data,'\u6b21\u56de\u306e\u958b\u50ac\u65e5\u7a0b'));
-  if(data.status==='voting'&&data.total>0){var pct=Math.round(data.responded/data.total*100);el('s-stats').innerHTML='<div class="stats"><div class="stat-card"><div class="stat-num">'+data.responded+'/'+data.total+'</div><div class="stat-label">\u56de\u7b54\u6e08\u307f</div></div></div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><p class="text-sm text-muted">'+pct+'% \u56de\u7b54\u6e08\u307f</p>';}
+  setText('s-month',data.meetingMonth?data.meetingMonth+'月分':'');
+  setHtml('s-steps',renderSteps8(s));
+  /* 確定後は日付カードが情報を持つので、状況メッセージは調整中だけ出す */
+  var settled=(s==='confirmed'||s==='today'||s==='completed');
+  setText('s-message',settled?'':(data.statusMessage||''));
+  if(data.confirmedDate){setText('s-confirmed-eyebrow',s==='today'?'本日の開催':s==='completed'?'開催済み':'次回の開催');setHtml('s-confirmed',dateCardHtml_(data,{today:s==='today'}));show('s-confirmed-card');}
+  else{setHtml('s-confirmed','');hide('s-confirmed-card');}
+  if(s==='voting'&&data.total>0){var pct=Math.round(data.responded/data.total*100);el('s-stats').innerHTML='<div class="pv-row" style="margin-top:14px"><span class="k">回答</span><span class="v">'+data.responded+' / '+data.total+' 名</span></div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><p class="pv-sub">'+pct+'% の方が回答済みです。</p>';}
   else el('s-stats').innerHTML='';
   /* VIP候補カレンダー表示 */
   renderPublicVipCalendar(data);
+  /* 共有資料（あるときだけ表示） */
+  var mats=data.materials||[];
+  if(mats.length>0){renderFilesList('s-materials-list',mats,{});show('s-materials');}else hide('s-materials');
   if(gPublicCameFromList)show('s-backwrap');else hide('s-backwrap');
   hide('v-status-list');show('v-status');
-  /* 公開ポータルの自動更新（60秒ごと） */
+  /* 公開ポータルの自動更新（60秒ごと・タブが見えているときだけ） */
   if(data.mode==='single'&&!gPublicPollTimer){
     gPublicPollTimer=setInterval(function(){
-      api('getPublicStatus',[data.meetingId]).then(function(r){var d2=unwrap(r);if(d2&&d2.ok)renderStatus(d2);}).catch(function(){});
+      if(document.hidden||!gPublicMeetingId)return;
+      api('getPublicStatus',[gPublicMeetingId]).then(function(r){var d2=unwrap(r);if(d2&&d2.ok)renderStatus(d2);}).catch(function(){});
     },60000);
   }
 }
-var gPublicPollTimer=null;
 
+function publicChip_(s){
+  if(s==='confirmed')return'<span class="pv-chip pv-chip-green">日程確定</span>';
+  if(s==='today')return'<span class="pv-chip pv-chip-amber">本日開催</span>';
+  if(s==='completed')return'<span class="pv-chip pv-chip-gray">開催済み</span>';
+  if(s==='setup'||!s)return'<span class="pv-chip pv-chip-gray">準備中</span>';
+  return'<span class="pv-chip pv-chip-blue">調整中</span>';
+}
 function renderPublicVipCalendar(data){
   var wrap=el('s-vip-calendar');if(!wrap)return;
   var vc=parseInt(data.vipCount||'0',10);
   var vipInfo=data.vipInfo||[];
   var cal=data.calConfig;
-  if(vc===0||!cal||vipInfo.length===0){wrap.textContent='';return;}
+  if(vc===0||!cal||vipInfo.length===0){wrap.textContent='';hide('s-vip-calendar');return;}
   var anyResp=vipInfo.some(function(v){return v.responded&&v.slots.length>0;});
-  if(!anyResp){wrap.textContent='';return;}
+  if(!anyResp){wrap.textContent='';hide('s-vip-calendar');return;}
   /* 範囲指定 / 個別指定 両モード対応 */
   var days=[];
   var dateMode=data.dateMode||'range';
@@ -700,12 +758,12 @@ function renderPublicVipCalendar(data){
     days=getWeekdays(cal.start,cal.end);
   }
   var hours=getHours(cal.startHour,cal.endHour);
-  if(days.length===0||hours.length===0){wrap.textContent='候補日時の準備中です。';return;}
+  if(days.length===0||hours.length===0){wrap.innerHTML='<h2 class="pv-eyebrow">候補日時の状況</h2><p class="pv-sub">候補日時の準備中です。</p>';show('s-vip-calendar');return;}
   var slotMap={};
   var VIP_COLORS=['cal-vip1','cal-vip2','cal-vip3'];
   vipInfo.forEach(function(v){(v.slots||[]).forEach(function(iso){if(!slotMap[iso])slotMap[iso]=[];slotMap[iso].push(v.vipNum);});});
   var JP=['日','月','火','水','木','金','土'];
-  var h='<div style="margin-top:24px"><div class="section-title">候補日時の状況</div>';
+  var h='<h2 class="pv-eyebrow">候補日時の状況</h2>';
   h+='<div class="pub-cal-legend">';
   vipInfo.forEach(function(v,i){if(!v.responded)return;h+='<span><span class="lcl-dot '+VIP_COLORS[i%3]+'"></span>'+esc(honorific(v.name))+'</span>';});
   if(vc>=2)h+='<span><span class="lcl-dot cal-overlap"></span>全員一致</span>';
@@ -718,8 +776,8 @@ function renderPublicVipCalendar(data){
   h+='<p class="text-sm text-muted" id="pub-cal-scroll-msg" style="margin:4px 0">← 横にスクロールできます →</p>';
   h+='<div style="margin-top:10px">';
   vipInfo.forEach(function(v){var ok=v.responded;h+='<p class="text-sm" style="margin:4px 0"><span style="color:'+(ok?'var(--green)':'var(--gray)')+'">'+(ok?'✓':'…')+'</span> '+esc(honorific(v.name))+'：'+(ok?v.slots.length+'枠 選択済み':'回答待ち')+'</p>';});
-  h+='</div></div>';
-  wrap.innerHTML=h;
+  h+='</div>';
+  wrap.innerHTML=h;show('s-vip-calendar');
   setTimeout(function(){var w=el('pub-cal-wrap');if(w&&w.scrollWidth<=w.clientWidth){var hi=el('pub-cal-hint');if(hi)hi.classList.add('scrolled-end');var ms=el('pub-cal-scroll-msg');if(ms)ms.style.display='none';}},100);
 }
 function renderPublicList(list){
@@ -742,56 +800,126 @@ function backToPublicList(){gPublicCameFromList=false;hide('v-status');hide('s-b
 /* ===== Participant routing ===== */
 function routeParticipant(data){
   hideLoading();
-  if(!data||!data.ok){var msg='\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f';if(data){if(data.error==='invalid_token')msg='\u3053\u306eURL\u306f\u7121\u52b9\u3067\u3059\u3002\u30e1\u30fc\u30eb\u306b\u8a18\u8f09\u3055\u308c\u305fURL\u3092\u3054\u78ba\u8a8d\u304f\u3060\u3055\u3044\u3002';else if(data.error==='archived')msg=data.message||'\u3053\u306e\u4f1a\u8b70\u306f\u30a2\u30fc\u30ab\u30a4\u30d6\u3055\u308c\u3066\u3044\u307e\u3059\u3002';}showError(msg);return;}
+  if(!data||!data.ok){var msg='読み込みに失敗しました';if(data){if(data.error==='invalid_token')msg='このURLは無効です。メールに記載されたURLをご確認ください。';else if(data.error==='archived')msg=data.message||'この会議はアーカイブされています。';}showError(msg);return;}
   if(data.orgName){gOrgName=data.orgName;setText('header-org',gOrgName);}
   if(data.emailGreeting)gGreeting=data.emailGreeting;
   gParticipantData=data;gParticipantId=data.participantId||'';
+  renderParticipantHero_(data);
   if(data.viewType==='calendar')renderCalendarView(data);else renderVoteView(data);
-  renderMaterialsList(data.viewType==='calendar'?'cal-mat-list':'v-mat-list',data.materials||[]);
+  renderFilesList('p-mat-list',data.materials||[],{canDelete:true});
+  show('v-participant');
 }
 
-/* ===== Calendar view ===== */
+/* --- 先生向け画面の共通部品 --- */
+function renderParticipantHero_(data){
+  setText('p-who',data.name+' '+(data.emailGreeting||'先生')+'、こんにちは');
+  setText('p-title',data.meetingTitle+(data.meetingMonth?'（'+data.meetingMonth+'月分）':''));
+  setHtml('p-chip',participantChip_(data));
+}
+function participantNeedsAction_(data){
+  if(data.viewType==='calendar')return !!(data.myStageOpen&&data.calReady);
+  return data.status==='voting'&&!!(data.dates&&data.dates.length>0);
+}
+function participantChip_(data){
+  var s=data.status;
+  if(s==='confirmed')return'<span class="pv-chip pv-chip-green">日程確定</span>';
+  if(s==='today')return'<span class="pv-chip pv-chip-amber">本日開催</span>';
+  if(s==='completed')return'<span class="pv-chip pv-chip-gray">開催済み</span>';
+  if(participantNeedsAction_(data))return data.responded?'<span class="pv-chip pv-chip-green">回答済み（変更可）</span>':'<span class="pv-chip pv-chip-blue">回答をお願いします</span>';
+  return'<span class="pv-chip pv-chip-blue">調整中</span>';
+}
+function parseIsoLocal_(iso){if(!iso)return null;var d=new Date(String(iso));return isNaN(d.getTime())?null:d;}
+function fmtTime_(d){return pad2(d.getHours())+':'+pad2(d.getMinutes());}
+/** "2026-09-12" → "9月12日（金）" */
+function fmtDeadlineJp_(ymd){var m=String(ymd||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);if(!m)return String(ymd||'');var d=new Date(parseInt(m[1],10),parseInt(m[2],10)-1,parseInt(m[3],10));var JP=['日','月','火','水','木','金','土'];return(d.getMonth()+1)+'月'+d.getDate()+'日（'+JP[d.getDay()]+'）';}
+function gcalUrl_(data,start){
+  var end=new Date(start.getTime()+(parseInt(data.meetingDuration,10)||60)*60000);
+  function f(d){return d.getFullYear()+pad2(d.getMonth()+1)+pad2(d.getDate())+'T'+pad2(d.getHours())+pad2(d.getMinutes())+'00';}
+  var q='action=TEMPLATE&text='+encodeURIComponent(data.meetingTitle||'会議')+'&dates='+f(start)+'/'+f(end)+'&ctz=Asia/Tokyo';
+  if(data.confirmedVenue)q+='&location='+encodeURIComponent(data.confirmedVenue);
+  if(data.meetUrl)q+='&details='+encodeURIComponent('Google Meet: '+data.meetUrl);
+  return'https://calendar.google.com/calendar/render?'+q;
+}
+function dateCardHtml_(data,opts){
+  opts=opts||{};
+  var start=parseIsoLocal_(data.confirmedIso);
+  var JP=['日','月','火','水','木','金','土'];
+  var h='<div class="pv-date">';
+  if(start){
+    var end=new Date(start.getTime()+(parseInt(data.meetingDuration,10)||60)*60000);
+    h+='<div class="pv-cal"><div class="m">'+(opts.today?'今日':(start.getMonth()+1)+'月')+'</div><div class="d">'+start.getDate()+'</div><div class="w">'+JP[start.getDay()]+'曜日</div></div>';
+    h+='<div class="pv-info"><div class="pv-row"><span class="k">時刻</span><span class="v">'+fmtTime_(start)+' – '+fmtTime_(end)+'</span></div>';
+  }else{
+    h+='<div class="pv-info"><div class="pv-row"><span class="k">日時</span><span class="v">'+esc(data.confirmedDate||'')+'</span></div>';
+  }
+  if(data.confirmedVenue)h+='<div class="pv-row"><span class="k">会場</span><span class="v">'+esc(data.confirmedVenue)+'</span></div>';
+  if(data.meetUrl)h+='<div class="pv-row"><span class="k">Meet</span><span class="v pv-v-light">'+esc(String(data.meetUrl).replace(/^https?:\/\//,''))+'</span></div>';
+  h+='</div></div>';
+  var notice=venueChangeNoticeFrom_(data);
+  if(notice)h+='<div class="pv-notice pv-notice-amber">'+esc(notice)+'</div>';
+  var btns='';
+  if(data.meetUrl)btns+='<a class="pv-btn pv-btn-primary'+(opts.today?' pv-btn-lg':'')+'" href="'+esc(data.meetUrl)+'" target="_blank" rel="noopener">Google Meet に参加</a>';
+  if(start&&!opts.today)btns+='<a class="pv-btn pv-btn-ghost" href="'+esc(gcalUrl_(data,start))+'" target="_blank" rel="noopener">カレンダーに追加</a>';
+  if(btns)h+='<div class="pv-actions">'+btns+'</div>';
+  return h;
+}
+function actionHead_(eyebrow,lead,sub){setText('p-eyebrow',eyebrow);setHtml('p-action-body','<p class="pv-lead">'+esc(lead)+'</p>'+(sub?'<p class="pv-sub">'+esc(sub)+'</p>':''));}
+function setActionExtra_(html){setHtml('p-action-extra',html||'');}
+/** 確定・当日・終了の共通表示。描画したら true（入力フォームは不要） */
+function renderCommonState_(data){
+  var s=data.status;
+  if(s==='confirmed'){actionHead_('次回の開催','日程が確定しました。ご対応いただくことはありません。','前日にリマインドメールをお送りします。');setActionExtra_(dateCardHtml_(data));return true;}
+  if(s==='today'){var st=parseIsoLocal_(data.confirmedIso);actionHead_('本日の開催','本日'+(st?' '+fmtTime_(st)+' ':'')+'から開催します。',data.meetUrl?'オンラインの方は下のボタンから参加できます。':'');setActionExtra_(dateCardHtml_(data,{today:true}));return true;}
+  if(s==='completed'){actionHead_('開催済み',(data.confirmedDate?data.confirmedDate+' の':'')+'会議は終了しました。','共有された資料はこのページから引き続きダウンロードできます。');setActionExtra_('');return true;}
+  return false;
+}
+
+/* ===== Calendar view（コア参加者） ===== */
 function renderCalendarView(data){
   var vc=parseInt(data.vipCount||'0',10);updateDynamicSteps(vc,[],data.meetingMonth||'');
-  setText('cal-greeting','\u3053\u3093\u306b\u3061\u306f\u3001'+data.name+' '+(data.emailGreeting||'\u5148\u751f'));
-  setText('cal-subtitle',data.meetingTitle);
-  setHtml('cal-confirmed-block',confirmedBlockHtml_(data,'\u65e5\u7a0b\u304c\u78ba\u5b9a\u3057\u307e\u3057\u305f'));
-  if(!data.calReady){
-    el('cal-form-area').classList.add('hidden');
-    var wm=data.isFirstVip?'\u62c5\u5f53\u8005\u3088\u308a\u65e5\u7a0b\u8abf\u6574\u306e\u3054\u6848\u5185\u304c\u5c4a\u304d\u307e\u3059\u3002':'\u524d\u306e\u65b9\u306e\u5165\u529b\u5b8c\u4e86\u5f8c\u306b\u3054\u6848\u5185\u3044\u305f\u3057\u307e\u3059\u3002';
-    el('cal-status-msg').innerHTML='<div class="info-box info-box-amber"><h3>\u6e96\u5099\u4e2d</h3><p>'+esc(wm)+'</p></div>';
-  } else {
-    var prevSlots=data.prevVipSlots||[];var vipNum=data.vipNum||1;
-    gIsLaterVip=vipNum>1;gPrevVipSlots=prevSlots.slice();
-    if(gIsLaterVip){
-      gCalSlots=data.responded?(data.mySlots||[]).slice():prevSlots.slice();
-      setText('cal-inst-title','\u524d\u306e\u65b9\u304c\u7a7a\u3044\u3066\u3044\u308b\u65e5\u6642\u304c\u8868\u793a\u3055\u308c\u3066\u3044\u307e\u3059');
-      el('cal-inst-body').innerHTML='\u7dd1 \u2713 = \u3042\u306a\u305f\u3082\u53c2\u52a0OK\u3000\u30b0\u30ec\u30fc \u00d7 = \u53c2\u52a0NG\u3002\u30af\u30ea\u30c3\u30af\u3067\u5207\u308a\u66ff\u3048\u3067\u304d\u307e\u3059\u3002';
-      el('cal-legend').innerHTML='';
-      el('cal-grid-wrap').innerHTML=buildChecklistView(prevSlots,gCalSlots);
-    } else {
-      gCalSlots=(data.mySlots||[]).slice();
-      var useGrid=data.dateMode==='range'&&data.timeMode==='selectable';
-      if(useGrid){
-        setText('cal-inst-title','ご都合のよい日時の枠をクリックしてください');
-        setText('cal-inst-body','複数選択できます。もう一度クリックすると解除されます。');
-        el('cal-legend').innerHTML='<div class="legend-item"><div class="legend-box" style="background:#bfdbfe;border-color:#60a5fa"></div><span>選択済み</span></div>';
-        el('cal-grid-wrap').innerHTML=buildCalGrid(data.calConfig,gCalSlots,[],false,data.meetingDuration||60);
-      } else {
-        var instTitle=data.timeMode==='fixed'?'ご都合のよい日付をクリックしてください':'ご都合のよい日時をクリックしてください';
-        var instBody=data.timeMode==='fixed'?'時間帯は '+pad2(data.calConfig.startHour)+':00〜'+pad2(data.calConfig.endHour)+':00 で固定です。':'複数選択できます。もう一度クリックすると解除されます。';
-        setText('cal-inst-title',instTitle);
-        setText('cal-inst-body',instBody);
-        el('cal-legend').innerHTML='';
-        var slotsToShow=data.allowedSlots||data.prevVipSlots||[];
-        var emptyMsg='指定された条件で選択可能な日程がまだ作成されていません。担当者に確認してください。';
-        el('cal-grid-wrap').innerHTML=buildChecklistView(slotsToShow,gCalSlots,emptyMsg);
-      }
-    }
-    updateCalCount();
-    if(data.responded)el('cal-msg').innerHTML='<div class="msg msg-success">\u9001\u4fe1\u6e08\u307f\u3067\u3059\u3002\u5909\u66f4\u304c\u3042\u308b\u5834\u5408\u306f\u518d\u5ea6\u9001\u4fe1\u3057\u3066\u304f\u3060\u3055\u3044\u3002</div>';
+  hide('v-form-area');
+  if(renderCommonState_(data)){hide('cal-form-area');return;}
+  if(!(data.myStageOpen&&data.calReady)){
+    hide('cal-form-area');setActionExtra_('');
+    if(data.responded&&!data.myStageOpen)actionHead_('現在の状況','ご入力ありがとうございました。日程を調整中です。','日程が確定しましたらメールでお知らせします。');
+    else if(!data.myStageOpen&&!data.isFirstVip)actionHead_('現在の状況','日程を調整中です。','前の方の入力が終わりましたら、メールでご案内します。いまご対応いただくことはありません。');
+    else if(!data.calReady&&data.isFirstVip)actionHead_('現在の状況','事務局が候補期間を準備中です。','準備ができ次第、メールでご案内します。');
+    else if(!data.calReady)actionHead_('現在の状況','前の方の入力が終わりましたら、ご案内します。','いまご対応いただくことはありません。');
+    else actionHead_('現在の状況','日程を調整中です。','日程が確定しましたらメールでお知らせします。');
+    return;
   }
-  show('v-calendar');
+  actionHead_('ご都合の入力','ご都合のよい日時を選んでください。',(data.myDeadline?'回答期限：'+fmtDeadlineJp_(data.myDeadline)+'。':'')+'送信後も期限までは変更できます。');
+  setActionExtra_('');
+  show('cal-form-area');
+  var prevSlots=data.prevVipSlots||[];var vipNum=data.vipNum||1;
+  gIsLaterVip=vipNum>1;gPrevVipSlots=prevSlots.slice();
+  if(gIsLaterVip){
+    gCalSlots=data.responded?(data.mySlots||[]).slice():prevSlots.slice();
+    setText('cal-inst-title','前の方が空いている日時が表示されています');
+    setText('cal-inst-body','緑 ✓ = あなたも参加OK　グレー × = 参加NG。クリックで切り替えできます。');
+    el('cal-legend').innerHTML='';
+    el('cal-grid-wrap').innerHTML=buildChecklistView(prevSlots,gCalSlots);
+  }else{
+    gCalSlots=(data.mySlots||[]).slice();
+    var useGrid=data.dateMode==='range'&&data.timeMode==='selectable';
+    if(useGrid){
+      setText('cal-inst-title','ご都合のよい日時の枠をクリックしてください');
+      setText('cal-inst-body','複数選択できます。もう一度クリックすると解除されます。');
+      el('cal-legend').innerHTML='<div class="legend-item"><div class="legend-box" style="background:#bfdbfe;border-color:#60a5fa"></div><span>選択済み</span></div>';
+      el('cal-grid-wrap').innerHTML=buildCalGrid(data.calConfig,gCalSlots,[],false,data.meetingDuration||60);
+    }else{
+      var instTitle=data.timeMode==='fixed'?'ご都合のよい日付をクリックしてください':'ご都合のよい日時をクリックしてください';
+      var instBody=data.timeMode==='fixed'?'時間帯は '+pad2(data.calConfig.startHour)+':00〜'+pad2(data.calConfig.endHour)+':00 で固定です。':'複数選択できます。もう一度クリックすると解除されます。';
+      setText('cal-inst-title',instTitle);
+      setText('cal-inst-body',instBody);
+      el('cal-legend').innerHTML='';
+      var slotsToShow=data.allowedSlots||data.prevVipSlots||[];
+      var emptyMsg='指定された条件で選択可能な日程がまだ作成されていません。担当者に確認してください。';
+      el('cal-grid-wrap').innerHTML=buildChecklistView(slotsToShow,gCalSlots,emptyMsg);
+    }
+  }
+  updateCalCount();
+  if(data.responded)el('cal-msg').innerHTML='<div class="msg msg-success">送信済みです。変更がある場合は再度送信してください。</div>';
 }
 function buildChecklistView(prevSlots,selected,emptyMsg){
   if(!prevSlots||prevSlots.length===0)return'<p class="text-muted">'+esc(emptyMsg||'\u524d\u306e\u65b9\u306e\u5165\u529b\u304c\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002')+'</p>';
@@ -827,30 +955,32 @@ function updateCalCount(){if(gIsLaterVip){var t=gPrevVipSlots.length,s=gCalSlots
 function clearCalendar(){if(gIsLaterVip){gCalSlots=gPrevVipSlots.slice();document.querySelectorAll('.hslot-item').forEach(function(i){i.className='hslot-item ok';i.querySelector('.hslot-check').textContent='\u2713';});}else{gCalSlots=[];document.querySelectorAll('.cal-slot.cal-selected').forEach(function(c){c.classList.remove('cal-selected');});}updateCalCount();}
 function submitCalendar(){if(gCalSlots.length===0){el('cal-msg').innerHTML='<div class="msg msg-error">\u5c11\u306a\u304f\u3068\u30821\u3064\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002</div>';return;}var btn=el('cal-submit-btn');btn.disabled=true;btn.textContent='\u9001\u4fe1\u4e2d...';google.script.run.withSuccessHandler(function(r){btn.disabled=false;btn.textContent='\u3053\u306e\u5185\u5bb9\u3067\u9001\u4fe1\u3059\u308b';if(r.ok)el('cal-msg').innerHTML='<div class="msg msg-success">'+gCalSlots.length+'\u4ef6\u306e\u65e5\u6642\u3092\u9001\u4fe1\u3057\u307e\u3057\u305f\u3002</div>';else el('cal-msg').innerHTML='<div class="msg msg-error">\u9001\u4fe1\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff1a'+esc(r.message||r.error||'')+'</div>';}).withFailureHandler(function(){btn.disabled=false;btn.textContent='\u3053\u306e\u5185\u5bb9\u3067\u9001\u4fe1\u3059\u308b';el('cal-msg').innerHTML='<div class="msg msg-error">\u901a\u4fe1\u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f\u3002</div>';}).submitCalendarSlots(TOKEN,gCalSlots);}
 
-/* ===== Vote view ===== */
+/* ===== Vote view（投票者） ===== */
 function renderVoteView(data){
   var vc=parseInt(data.vipCount||'0',10);updateDynamicSteps(vc,[],data.meetingMonth||'');
-  setText('v-greeting','\u3053\u3093\u306b\u3061\u306f\u3001'+data.name+' '+(data.emailGreeting||'\u5148\u751f'));setText('v-subtitle',data.meetingTitle);
-  setHtml('v-confirmed-block',confirmedBlockHtml_(data,'\u65e5\u7a0b\u304c\u78ba\u5b9a\u3057\u307e\u3057\u305f'));
+  hide('cal-form-area');
+  if(renderCommonState_(data)){hide('v-form-area');return;}
   if(data.status==='voting'&&data.dates&&data.dates.length>0){
-    el('v-form-area').classList.remove('hidden');setText('v-deadline-msg',data.deadline?'\u56de\u7b54\u671f\u9650\uff1a'+data.deadline:'');
+    actionHead_('出欠のご回答','候補日ごとに出欠をお知らせください。',(data.deadline?'回答期限：'+fmtDeadlineJp_(data.deadline)+'。':'')+'回答後も期限までは変更できます。');
+    setActionExtra_('');
     var gh='';data.dates.forEach(function(d){var cur=data.existing[d.id]||'';var cmt=(data.comments&&data.comments[d.id])?data.comments[d.id]:'';
-      gh+='<div class="date-row" data-date-id="'+esc(d.id)+'"><div class="date-row-main"><div class="date-label">'+esc(d.label)+'</div><div class="response-btns">'+mkRespBtn('\u25CB',cur)+mkRespBtn('\u25B3',cur)+mkRespBtn('\u00D7',cur)+'</div></div><div class="date-comment-row"><span class="cmt-icon">💬</span><input type="text" class="v-comment" placeholder="\u30b3\u30e1\u30f3\u30c8\uff08\u4efb\u610f\uff09" value="'+esc(cmt)+'" maxlength="200"></div></div>';});
+      gh+='<div class="date-row" data-date-id="'+esc(d.id)+'"><div class="date-row-main"><div class="date-label">'+esc(d.label)+'</div><div class="response-btns">'+mkRespBtn('○',cur)+mkRespBtn('△',cur)+mkRespBtn('×',cur)+'</div></div><div class="date-comment-row"><span class="cmt-icon">💬</span><input type="text" class="v-comment" placeholder="コメント（任意）" value="'+esc(cmt)+'" maxlength="200"></div></div>';});
     el('v-date-grid').innerHTML=gh;
-    if(data.responded)el('v-form-msg').innerHTML='<div class="msg msg-success">\u56de\u7b54\u6e08\u307f\u3067\u3059\u3002\u5909\u66f4\u304c\u3042\u308b\u5834\u5408\u306f\u518d\u5ea6\u9001\u4fe1\u3057\u3066\u304f\u3060\u3055\u3044\u3002</div>';
-  } else {
-    var m=data.status==='confirmed'?'\u65e5\u7a0b\u304c\u78ba\u5b9a\u3057\u307e\u3057\u305f\u3002':'\u62c5\u5f53\u8005\u304b\u3089\u306e\u3054\u6848\u5185\u3092\u304a\u5f85\u3061\u304f\u3060\u3055\u3044\u3002';
-    el('v-status-msg').innerHTML='<div class="info-box info-box-blue"><p>'+m+'</p></div>';
+    el('v-form-msg').innerHTML=data.responded?'<div class="msg msg-success">回答済みです。変更がある場合は再度送信してください。</div>':'';
+    show('v-form-area');
+  }else{
+    hide('v-form-area');setActionExtra_('');
+    actionHead_('現在の状況','日程を調整中です。','候補日が決まりましたら、出欠確認のメールをお送りします。いまご対応いただくことはありません。');
   }
-  show('v-vote');
 }
 function mkRespBtn(label,cur){var cls='sel-'+(label==='\u25CB'?'maru':label==='\u25B3'?'sankaku':'batsu');return'<button class="resp-btn'+(cur===label?' '+cls:'')+'" onclick="selectResp(this,\''+label+'\')">'+label+'</button>';}
 function selectResp(btn,label){var row=btn.closest('.date-row');row.querySelectorAll('.resp-btn').forEach(function(b){b.className='resp-btn';});if(label==='\u25CB')btn.className='resp-btn sel-maru';if(label==='\u25B3')btn.className='resp-btn sel-sankaku';if(label==='\u00D7')btn.className='resp-btn sel-batsu';}
 function submitVote(){var rows=document.querySelectorAll('#v-date-grid .date-row'),responses=[],ok=true;rows.forEach(function(row){var did=row.getAttribute('data-date-id');var sel=row.querySelector('.sel-maru,.sel-sankaku,.sel-batsu');var cmtEl=row.querySelector('.v-comment');var cmt=cmtEl?cmtEl.value.trim():'';if(!sel){ok=false;return;}responses.push({dateId:did,response:sel.textContent.trim(),comment:cmt});});if(!ok){el('v-form-msg').innerHTML='<div class="msg msg-error">\u3059\u3079\u3066\u306e\u65e5\u7a0b\u306b\u3064\u3044\u3066\u3054\u56de\u7b54\u304f\u3060\u3055\u3044\u3002</div>';return;}var btn=el('v-submit-btn');btn.disabled=true;btn.textContent='\u9001\u4fe1\u4e2d...';google.script.run.withSuccessHandler(function(r){btn.disabled=false;btn.textContent='\u56de\u7b54\u3092\u9001\u4fe1\u3059\u308b';if(r.ok)el('v-form-msg').innerHTML='<div class="msg msg-success">\u56de\u7b54\u3092\u9001\u4fe1\u3057\u307e\u3057\u305f\u3002</div>';else el('v-form-msg').innerHTML='<div class="msg msg-error">\u9001\u4fe1\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff1a'+esc(r.message||r.error||'')+'</div>';}).withFailureHandler(function(){btn.disabled=false;btn.textContent='\u56de\u7b54\u3092\u9001\u4fe1\u3059\u308b';el('v-form-msg').innerHTML='<div class="msg msg-error">\u901a\u4fe1\u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f\u3002</div>';}).submitAvailability(TOKEN,responses);}
 
 /* ===== Admin ===== */
-function loadAdminData(){show('loading');google.script.run.withSuccessHandler(function(data){if(!renderAdminList(data))return;if(gCurrentMeetingId)loadAdminMeetingDetail(gCurrentMeetingId,false);else{clearAdminDetail_();hideLoading();fetchNotifications();}}).withFailureHandler(function(err){hideLoading();showError((err&&err.message)||'\u7ba1\u7406\u8005\u30c7\u30fc\u30bf\u306e\u53d6\u5f97\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002');}).getAdminMeetingList(ADMIN_TOKEN);}
-function loadAdminMeetingDetail(id,showSpinner){if(!id)return;if(showSpinner!==false)show('loading');google.script.run.withSuccessHandler(function(data){renderAdminDetail(data);fetchNotifications();}).withFailureHandler(function(err){hideLoading();showError((err&&err.message)||'\u4f1a\u8b70\u8a73\u7d30\u306e\u53d6\u5f97\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002');}).getAdminMeetingDetail(ADMIN_TOKEN,id);}
+/* 初回は getAdminData 1 本で一覧・詳細・通知をまとめて取得する */
+function loadAdminData(){show('loading');google.script.run.withSuccessHandler(function(data){if(!renderAdminList(data))return;if(data.slackDefaultTemplate)gSlackDefaultTemplate=data.slackDefaultTemplate;applyNotifications_(data.notifications||[],false);if(data.current)renderAdminDetail({ok:true,current:data.current});else{clearAdminDetail_();hideLoading();}}).withFailureHandler(function(err){hideLoading();showError((err&&err.message)||'管理者データの取得に失敗しました。');}).getAdminData(ADMIN_TOKEN,gCurrentMeetingId||'');}
+function loadAdminMeetingDetail(id,showSpinner){if(!id)return;if(showSpinner!==false)show('loading');google.script.run.withSuccessHandler(function(data){if(data&&data.ok&&data.meetings)gAdminMeetings=data.meetings;renderAdminDetail(data);applyNotifications_((data&&data.notifications)||[],false);}).withFailureHandler(function(err){hideLoading();showError((err&&err.message)||'会議詳細の取得に失敗しました。');}).getAdminMeetingDetail(ADMIN_TOKEN,id);}
 function showTopTab(name){gCurrentTopTab=name;var tabs=document.querySelectorAll('#admin-top-tabs .top-tab-btn');tabs.forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.top-tab-content').forEach(function(c){c.classList.remove('active');});if(name==='meetings'){tabs[0].classList.add('active');el('top-tab-meetings').classList.add('active');}else if(name==='templates'){tabs[1].classList.add('active');el('top-tab-templates').classList.add('active');loadTemplates();}else if(name==='system'){tabs[2].classList.add('active');el('top-tab-system').classList.add('active');loadSlackConfig();}}
 function loadSlackConfig(){google.script.run.withSuccessHandler(function(r){if(!r||!r.ok)return;var x=el('sys-slack-webhook');if(x)x.value=r.webhookUrl||'';var xd=el('sys-slack-dm-webhook');if(xd)xd.value=r.dmWebhookUrl||'';gSlackDefaultTemplate=r.defaultTemplate||'';}).withFailureHandler(function(){}).adminGetSlackConfig(ADMIN_TOKEN);}
 function saveSlackWebhook(){var url=(el('sys-slack-webhook')||{}).value||'';setHtml('sys-slack-msg','<div class="msg msg-info">保存中…</div>');google.script.run.withSuccessHandler(function(r){setHtml('sys-slack-msg',r&&r.ok?'<div class="msg msg-success">保存しました。</div>':'<div class="msg msg-error">保存に失敗：'+((r&&r.error)||'')+'</div>');}).withFailureHandler(function(err){setHtml('sys-slack-msg','<div class="msg msg-error">通信エラー：'+((err&&err.message)||err)+'</div>');}).adminSetSlackWebhookUrl(ADMIN_TOKEN,url.trim());}
@@ -859,13 +989,17 @@ function testSlackDmWebhook(){setHtml('sys-slack-dm-msg','<div class="msg msg-in
 function testSlackWebhook(){setHtml('sys-slack-msg','<div class="msg msg-info">テスト送信中…</div>');google.script.run.withSuccessHandler(function(r){setHtml('sys-slack-msg',r&&r.ok?'<div class="msg msg-success">テスト通知を送信しました。Slack を確認してください。</div>':'<div class="msg msg-error">失敗：'+((r&&r.error)||'')+'</div>');}).withFailureHandler(function(err){setHtml('sys-slack-msg','<div class="msg msg-error">通信エラー：'+((err&&err.message)||err)+'</div>');}).adminTestSlackWebhook(ADMIN_TOKEN);}
 
 /* Notifications */
-function fetchNotifications(autoRefresh){if(!ADMIN_TOKEN)return;google.script.run.withSuccessHandler(function(r){if(!r||!r.ok)return;var list=r.notifications||[];var nid=list.length?String(list[0].id):'';if(!gNotifInitialized){gLastNotifId=nid;gNotifInitialized=true;renderNotifications(list);return;}if(nid&&nid!==gLastNotifId){gLastNotifId=nid;renderNotifications(list);if(autoRefresh)refreshAdminSilently();}else renderNotifications(list);}).withFailureHandler(function(){}).getNotifications(ADMIN_TOKEN,gCurrentMeetingId);}
-function refreshAdminSilently(){if(!ADMIN_TOKEN)return;google.script.run.withSuccessHandler(function(data){if(!data||!data.ok)return;gAdminMeetings=data.meetings||[];renderMeetingList();if(!gCurrentMeetingId)return;if(serializeSetupForm_()!==gSetupBaseline||serializePeriodForm_()!==gPeriodBaseline)return;google.script.run.withSuccessHandler(function(d){if(d&&d.ok&&d.current){gAdminData=d.current;renderMeetingDetailContents(d.current);}}).withFailureHandler(function(){}).getAdminMeetingDetail(ADMIN_TOKEN,gCurrentMeetingId);}).withFailureHandler(function(){}).getAdminMeetingList(ADMIN_TOKEN);}
+function applyNotifications_(list,autoRefresh){var nid=list.length?String(list[0].id):'';if(!gNotifInitialized){gLastNotifId=nid;gNotifInitialized=true;renderNotifications(list);return;}if(nid&&nid!==gLastNotifId){gLastNotifId=nid;renderNotifications(list);if(autoRefresh)refreshAdminSilently();}else renderNotifications(list);}
+function fetchNotifications(autoRefresh){if(!ADMIN_TOKEN)return;google.script.run.withSuccessHandler(function(r){if(!r||!r.ok)return;applyNotifications_(r.notifications||[],autoRefresh);}).withFailureHandler(function(){}).getNotifications(ADMIN_TOKEN,gCurrentMeetingId);}
+/* 通知に変化があったときの再取得。会議選択中は詳細 1 本（一覧も同梱される）で済ませる */
+function refreshAdminSilently(){if(!ADMIN_TOKEN)return;if(!gCurrentMeetingId){google.script.run.withSuccessHandler(function(data){if(!data||!data.ok)return;gAdminMeetings=data.meetings||[];renderMeetingList();}).withFailureHandler(function(){}).getAdminMeetingList(ADMIN_TOKEN);return;}if(serializeSetupForm_()!==gSetupBaseline||serializePeriodForm_()!==gPeriodBaseline)return;google.script.run.withSuccessHandler(function(d){if(!d||!d.ok||!d.current)return;if(d.meetings){gAdminMeetings=d.meetings;renderMeetingList();}gAdminData=d.current;renderMeetingDetailContents(d.current);}).withFailureHandler(function(){}).getAdminMeetingDetail(ADMIN_TOKEN,gCurrentMeetingId);}
 function renderNotifications(list){var badge=el('notif-badge'),listEl=el('notif-list');if(!badge||!listEl)return;if(list.length===0){listEl.innerHTML='<div class="notif-empty">\u901a\u77e5\u306f\u3042\u308a\u307e\u305b\u3093</div>';badge.classList.add('hidden');gNotifCount=0;return;}listEl.innerHTML=list.map(function(n){var icon=/calendar/.test(n.type)?'📅':n.type==='vote'?'✅':'📌';return'<div class="notif-item"><span class="notif-icon">'+icon+'</span><div class="notif-body"><div class="notif-msg">'+esc(n.message)+'</div><div class="notif-time">'+esc(n.timestamp)+'</div></div></div>';}).join('');var c=Math.min(list.length,99);gNotifCount=c;badge.textContent=c>99?'99+':String(c);badge.classList.remove('hidden');}
 function toggleNotifPanel(){var p=el('notif-panel');gNotifOpen=!gNotifOpen;if(gNotifOpen){p.classList.add('open');fetchNotifications();}else p.classList.remove('open');}
 function closeNotifPanel(){gNotifOpen=false;el('notif-panel').classList.remove('open');}
 document.addEventListener('click',function(e){var w=el('notif-wrap');if(w&&!w.contains(e.target))closeNotifPanel();});
-function startNotifPolling(){if(gNotifPollTimer)clearInterval(gNotifPollTimer);gNotifPollTimer=setInterval(function(){if(ADMIN_TOKEN)fetchNotifications(true);},30000);}
+/* 60 秒ごと・タブが見えているときだけ通知を確認。タブに戻ったときは 1 回だけ即時確認 */
+function startNotifPolling(){if(gNotifPollTimer)clearInterval(gNotifPollTimer);gNotifPollTimer=setInterval(function(){if(ADMIN_TOKEN&&!document.hidden)fetchNotifications(true);},60000);}
+document.addEventListener('visibilitychange',function(){if(document.hidden)return;if(ADMIN_TOKEN&&gNotifInitialized)fetchNotifications(true);if(gPublicPollTimer&&gPublicMeetingId)api('getPublicStatus',[gPublicMeetingId]).then(function(r){var d=unwrap(r);if(d&&d.ok)renderStatus(d);}).catch(function(){});});
 
 function renderAdminList(data){
   if(!data||!data.ok){hideLoading();showError(data&&data.error==='unauthorized'?'\u7ba1\u7406\u8005URL\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002':'\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f');return false;}
@@ -1555,12 +1689,23 @@ function submitWizard(){
 }
 
 /* ===== Materials ===== */
-function uploadMaterialParticipant(prefix){var fe=el(prefix+'-mat-file');var mi=prefix+'-mat-msg';if(!fe||!fe.files||fe.files.length===0){setHtml(mi,'<div class="msg msg-error">\u30d5\u30a1\u30a4\u30eb\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002</div>');return;}var file=fe.files[0];if(file.size>35*1024*1024){setHtml(mi,'<div class="msg msg-error">\u30d5\u30a1\u30a4\u30eb\u30b5\u30a4\u30ba\u304c 35MB \u3092\u8d85\u3048\u3066\u3044\u307e\u3059\u3002</div>');return;}setHtml(mi,'<div class="mat-progress">\u300c'+esc(file.name)+'\u300d\u3092\u9001\u4fe1\u4e2d...</div>');var reader=new FileReader();reader.onload=function(ev){var du=ev.target.result;var c=du.indexOf(',');var b64=c>=0?du.substring(c+1):du;google.script.run.withSuccessHandler(function(r){fe.value='';if(r&&r.ok){setHtml(mi,'<div class="msg msg-success">\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3057\u307e\u3057\u305f\u3002</div>');google.script.run.withSuccessHandler(function(pd){if(pd&&pd.ok){gParticipantData=pd;renderMaterialsList(pd.viewType==='calendar'?'cal-mat-list':'v-mat-list',pd.materials||[]);}}).getParticipantView(TOKEN);}else setHtml(mi,'<div class="msg msg-error">\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u306b\u5931\u6557\uff1a'+esc(r&&r.error||'')+'</div>');}).withFailureHandler(function(err){setHtml(mi,'<div class="msg msg-error">\u901a\u4fe1\u30a8\u30e9\u30fc\uff1a'+esc((err&&err.message)||String(err))+'</div>');}).uploadMaterial(TOKEN,file.name,file.type||'application/octet-stream',b64);};reader.onerror=function(){setHtml(mi,'<div class="msg msg-error">\u30d5\u30a1\u30a4\u30eb\u306e\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002</div>');};reader.readAsDataURL(file);}
-function deleteMaterialParticipant(mid){if(!confirm('\u3053\u306e\u8cc7\u6599\u3092\u524a\u9664\u3057\u307e\u3059\u304b\uff1f'))return;google.script.run.withSuccessHandler(function(r){if(r&&r.ok){google.script.run.withSuccessHandler(function(pd){if(pd&&pd.ok){gParticipantData=pd;renderMaterialsList(pd.viewType==='calendar'?'cal-mat-list':'v-mat-list',pd.materials||[]);}}).getParticipantView(TOKEN);}else alert('\u524a\u9664\u306b\u5931\u6557\uff1a'+(r&&r.error||''));}).deleteMaterial(TOKEN,mid);}
-function adminDeleteMaterial(mid){if(!confirm('\u3053\u306e\u8cc7\u6599\u3092\u524a\u9664\u3057\u307e\u3059\u304b\uff1f'))return;google.script.run.withSuccessHandler(function(r){if(r&&r.ok)loadAdminData();else alert('\u524a\u9664\u306b\u5931\u6557\uff1a'+(r&&r.error||''));}).adminDeleteMaterial(ADMIN_TOKEN,gCurrentMeetingId,mid);}
-function downloadMaterialParticipant(mid){google.script.run.withSuccessHandler(function(r){if(r&&r.ok)triggerBrowserDownload(r.fileName,r.mimeType,r.base64Data);else alert('\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u306b\u5931\u6557\uff1a'+(r&&r.error||''));}).withFailureHandler(function(err){alert('\u901a\u4fe1\u30a8\u30e9\u30fc\uff1a'+((err&&err.message)||err));}).downloadMaterial(TOKEN,mid);}
-function downloadMaterialAdmin(mid){google.script.run.withSuccessHandler(function(r){if(r&&r.ok)triggerBrowserDownload(r.fileName,r.mimeType,r.base64Data);else alert('\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u306b\u5931\u6557\uff1a'+(r&&r.error||''));}).withFailureHandler(function(err){alert('\u901a\u4fe1\u30a8\u30e9\u30fc\uff1a'+((err&&err.message)||err));}).adminDownloadMaterial(ADMIN_TOKEN,gCurrentMeetingId,mid);}
-function renderMaterialsList(cid,mats,isAdmin){var c=el(cid);if(!c)return;if(!mats||mats.length===0){c.innerHTML='<div class="mat-empty">\u307e\u3060\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3055\u308c\u305f\u8cc7\u6599\u306f\u3042\u308a\u307e\u305b\u3093\u3002</div>';return;}c.innerHTML=mats.map(function(m){var isMine=!isAdmin&&gParticipantId&&String(m.participantId)===String(gParticipantId);var canDel=isAdmin||isMine;var df=isAdmin?'adminDeleteMaterial':'deleteMaterialParticipant';var dlf=isAdmin?'downloadMaterialAdmin':'downloadMaterialParticipant';var ds=m.uploadedAt?String(m.uploadedAt).replace('T',' ').substring(0,16):'';var db=canDel?'<button class="mat-del" onclick="'+df+'(\''+esc(m.id)+'\')" title="\u524a\u9664">\u00d7</button>':'';return'<div class="mat-item"><button type="button" class="mat-name" style="background:none;border:none;padding:0;text-align:left;cursor:pointer" onclick="'+dlf+'(\''+esc(m.id)+'\')">'+esc(m.fileName)+'</button><span class="mat-by">by '+esc(m.name)+(ds?' \u30fb '+esc(ds):'')+'</span>'+db+'</div>';}).join('');}
+/* 先生向け・共通ポータル用の資料一覧（管理画面は renderMaterialsList を使う） */
+function renderFilesList(cid,mats,opts){opts=opts||{};var c=el(cid);if(!c)return;if(!mats||mats.length===0){c.innerHTML='<p class="pv-empty">まだ共有された資料はありません。</p>';return;}
+  c.innerHTML=mats.map(function(m){var fn=String(m.fileName||'');var dot=fn.lastIndexOf('.');var ext=dot>0?fn.substring(dot+1).toUpperCase():'';if(!ext||ext.length>4)ext='FILE';var isMine=!!(opts.canDelete&&gParticipantId&&String(m.participantId)===String(gParticipantId));var ds=m.uploadedAt?String(m.uploadedAt).replace('T',' ').substring(0,16):'';
+    return'<div class="pv-file"><div class="pv-ic">'+esc(ext)+'</div><div><div class="pv-nm">'+esc(fn)+'</div><div class="pv-by">'+esc(m.name)+(ds?' ・ '+esc(ds):'')+'</div></div><div class="pv-file-btns"><button type="button" class="pv-dl" onclick="downloadFile_(\''+esc(m.id)+'\',this)">保存</button>'+(isMine?'<button type="button" class="pv-del" title="削除" onclick="deleteMaterialParticipant(\''+esc(m.id)+'\')">×</button>':'')+'</div></div>';}).join('');}
+/* トークンがあれば本人用 API、無ければ共通ポータル用 API でダウンロード */
+function downloadFile_(mid,btn){var orig=btn?btn.textContent:'';if(btn){btn.disabled=true;btn.textContent='取得中…';}var done=function(r){if(btn){btn.disabled=false;btn.textContent=orig;}if(r&&r.ok)triggerBrowserDownload(r.fileName,r.mimeType,r.base64Data);else alert('ダウンロードに失敗：'+(r&&r.error||''));};var fail=function(err){if(btn){btn.disabled=false;btn.textContent=orig;}alert('通信エラー：'+((err&&err.message)||err));};if(TOKEN)google.script.run.withSuccessHandler(done).withFailureHandler(fail).downloadMaterial(TOKEN,mid);else google.script.run.withSuccessHandler(done).withFailureHandler(fail).downloadPublicMaterial(gPublicMeetingId||MEETING_ID,mid);}
+function refreshParticipantFiles_(){google.script.run.withSuccessHandler(function(pd){if(pd&&pd.ok){gParticipantData=pd;renderFilesList('p-mat-list',pd.materials||[],{canDelete:true});}}).withFailureHandler(function(){}).getParticipantView(TOKEN);}
+function uploadParticipantFile_(file){var mi='p-mat-msg';if(!file){setHtml(mi,'<div class="msg msg-error">ファイルを選択してください。</div>');return;}if(file.size>35*1024*1024){setHtml(mi,'<div class="msg msg-error">ファイルサイズが 35MB を超えています。</div>');return;}setHtml(mi,'<div class="mat-progress">「'+esc(file.name)+'」を送信中...</div>');var reader=new FileReader();reader.onload=function(ev){var du=ev.target.result;var c=du.indexOf(',');var b64=c>=0?du.substring(c+1):du;google.script.run.withSuccessHandler(function(r){var fe=el('p-mat-file');if(fe)fe.value='';if(r&&r.ok){setHtml(mi,'<div class="msg msg-success">アップロードしました。</div>');refreshParticipantFiles_();}else setHtml(mi,'<div class="msg msg-error">アップロードに失敗：'+esc(r&&r.error||'')+'</div>');}).withFailureHandler(function(err){setHtml(mi,'<div class="msg msg-error">通信エラー：'+esc((err&&err.message)||String(err))+'</div>');}).uploadMaterial(TOKEN,file.name,file.type||'application/octet-stream',b64);};reader.onerror=function(){setHtml(mi,'<div class="msg msg-error">ファイルの読み込みに失敗しました。</div>');};reader.readAsDataURL(file);}
+function onMatFileChange_(input){if(input.files&&input.files[0])uploadParticipantFile_(input.files[0]);}
+function onMatDragOver_(ev){ev.preventDefault();var d=el('p-drop');if(d)d.classList.add('over');}
+function onMatDragLeave_(){var d=el('p-drop');if(d)d.classList.remove('over');}
+function onMatDrop_(ev){ev.preventDefault();onMatDragLeave_();var f=ev.dataTransfer&&ev.dataTransfer.files&&ev.dataTransfer.files[0];if(f)uploadParticipantFile_(f);}
+function deleteMaterialParticipant(mid){if(!confirm('この資料を削除しますか？'))return;google.script.run.withSuccessHandler(function(r){if(r&&r.ok)refreshParticipantFiles_();else alert('削除に失敗：'+(r&&r.error||''));}).deleteMaterial(TOKEN,mid);}
+function adminDeleteMaterial(mid){if(!confirm('この資料を削除しますか？'))return;google.script.run.withSuccessHandler(function(r){if(r&&r.ok)loadAdminData();else alert('削除に失敗：'+(r&&r.error||''));}).adminDeleteMaterial(ADMIN_TOKEN,gCurrentMeetingId,mid);}
+function downloadMaterialAdmin(mid){google.script.run.withSuccessHandler(function(r){if(r&&r.ok)triggerBrowserDownload(r.fileName,r.mimeType,r.base64Data);else alert('ダウンロードに失敗：'+(r&&r.error||''));}).withFailureHandler(function(err){alert('通信エラー：'+((err&&err.message)||err));}).adminDownloadMaterial(ADMIN_TOKEN,gCurrentMeetingId,mid);}
+/* 管理画面用の資料一覧 */
+function renderMaterialsList(cid,mats){var c=el(cid);if(!c)return;if(!mats||mats.length===0){c.innerHTML='<div class="mat-empty">まだアップロードされた資料はありません。</div>';return;}c.innerHTML=mats.map(function(m){var ds=m.uploadedAt?String(m.uploadedAt).replace('T',' ').substring(0,16):'';return'<div class="mat-item"><button type="button" class="mat-name" style="background:none;border:none;padding:0;text-align:left;cursor:pointer" onclick="downloadMaterialAdmin(\''+esc(m.id)+'\')">'+esc(m.fileName)+'</button><span class="mat-by">by '+esc(m.name)+(ds?' ・ '+esc(ds):'')+'</span><button class="mat-del" onclick="adminDeleteMaterial(\''+esc(m.id)+'\')" title="削除">×</button></div>';}).join('');}
 </script>
 </body>
 </html>
