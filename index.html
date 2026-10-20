@@ -551,7 +551,6 @@ var gIsLaterVip        = false;
 var gPrevVipSlots      = [];
 var gNotifCount        = 0;
 var gNotifOpen         = false;
-var gNotifPollTimer    = null;
 var gLastNotifId       = '';
 var gNotifInitialized  = false;
 var gCurrentTab        = 'setup';
@@ -706,7 +705,7 @@ function confirmedBlockHtml_(data,label){
 
 /* ===== Public status ===== */
 var gPublicCameFromList=false;
-var gPublicPollTimer=null;
+var gPublicSingle=false;
 var gPublicMeetingId='';
 function renderStatus(data){
   hideLoading();
@@ -737,13 +736,8 @@ function renderStatus(data){
   if(mats.length>0){renderFilesList('s-materials-list',mats,{});show('s-materials');}else hide('s-materials');
   if(gPublicCameFromList)show('s-backwrap');else hide('s-backwrap');
   hide('v-status-list');show('v-status');
-  /* 公開ポータルの自動更新（60秒ごと・タブが見えているときだけ） */
-  if(data.mode==='single'&&!gPublicPollTimer){
-    gPublicPollTimer=setInterval(function(){
-      if(document.hidden||!gPublicMeetingId)return;
-      api('getPublicStatus',[gPublicMeetingId]).then(function(r){var d2=unwrap(r);if(d2&&d2.ok)renderStatus(d2);}).catch(function(){});
-    },60000);
-  }
+  /* 定期の自動更新はしない（2026-10-19 廃止）。タブに戻ったときだけ取り直す（visibilitychange） */
+  gPublicSingle=(data.mode==='single');
 }
 
 function publicChip_(s){
@@ -1009,14 +1003,13 @@ function renderNotifications(list){var badge=el('notif-badge'),listEl=el('notif-
 function toggleNotifPanel(){var p=el('notif-panel');gNotifOpen=!gNotifOpen;if(gNotifOpen){p.classList.add('open');fetchNotifications();}else p.classList.remove('open');}
 function closeNotifPanel(){gNotifOpen=false;el('notif-panel').classList.remove('open');}
 document.addEventListener('click',function(e){var w=el('notif-wrap');if(w&&!w.contains(e.target))closeNotifPanel();});
-/* 60 秒ごと・タブが見えているときだけ通知を確認。タブに戻ったときは 1 回だけ即時確認 */
-function startNotifPolling(){if(gNotifPollTimer)clearInterval(gNotifPollTimer);gNotifPollTimer=setInterval(function(){if(ADMIN_TOKEN&&!document.hidden)fetchNotifications(true);},60000);}
-document.addEventListener('visibilitychange',function(){if(document.hidden)return;if(ADMIN_TOKEN&&gNotifInitialized)fetchNotifications(true);if(gPublicPollTimer&&gPublicMeetingId)api('getPublicStatus',[gPublicMeetingId]).then(function(r){var d=unwrap(r);if(d&&d.ok)renderStatus(d);}).catch(function(){});});
+/* 通知の定期確認は 2026-10-19 に廃止（回答は Slack DM で届くため）。ベルを開いたとき・タブに戻ったときに確認する */
+document.addEventListener('visibilitychange',function(){if(document.hidden)return;if(ADMIN_TOKEN&&gNotifInitialized)fetchNotifications(true);if(gPublicSingle&&gPublicMeetingId)api('getPublicStatus',[gPublicMeetingId]).then(function(r){var d=unwrap(r);if(d&&d.ok)renderStatus(d);}).catch(function(){});});
 
 function renderAdminList(data){
   if(!data||!data.ok){hideLoading();showError(data&&data.error==='unauthorized'?'\u7ba1\u7406\u8005URL\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002':'\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f');return false;}
   gAdminMeetings=data.meetings||[];if(data.orgName){gOrgName=data.orgName;setText('header-org',gOrgName);}if(data.emailGreeting)gGreeting=data.emailGreeting;
-  renderMeetingList();show('v-admin');startNotifPolling();
+  renderMeetingList();show('v-admin');
   if(data.hasTemplates===false&&!gCurrentMeetingId){hideLoading();showSetupWizard();return false;}
   return true;
 }
