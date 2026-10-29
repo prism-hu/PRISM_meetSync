@@ -1563,17 +1563,19 @@ var gManualCandidates=[];
 function buildManualCandidateForm_(){
   return '<div class="info-box info-box-blue"><h3>候補日時を追加してください</h3><p>コア参加者なしの構成です。候補日時を直接入力して投票者に打診できます。</p></div>'+
     '<div class="form-inline" style="margin:14px 0"><div class="form-row mb-0"><label>日付</label><input type="date" id="mc-date"></div>'+
-    '<div class="form-row mb-0"><label>開始時刻</label><select id="mc-hour">'+buildHourOptions_(9,18)+'</select></div>'+
+    '<div class="form-row mb-0"><label>開始時刻</label><select id="mc-time">'+buildTimeOptions_(8,20,30,'10:00')+'</select></div>'+
     '<button class="btn btn-outline btn-sm" onclick="addManualCandidate()" style="margin-top:18px">＋ 追加</button></div>'+
     '<div id="mc-list" class="overlap-list"></div>'+
     '<div id="mc-msg"></div>';
 }
-function buildHourOptions_(from,to){var h='';for(var i=from;i<=to;i++)h+='<option value="'+i+'">'+pad2(i)+':00</option>';return h;}
+/* 開始時刻の選択肢。from 時〜to 時を stepMin 分刻み（30 分枠の照会にも使えるよう 2026-10-29 に 1 時間刻みから変更） */
+function buildTimeOptions_(from,to,stepMin,selected){var h='';for(var m=from*60;m<=to*60;m+=stepMin){var t=pad2(Math.floor(m/60))+':'+pad2(m%60);h+='<option value="'+t+'"'+(t===selected?' selected':'')+'>'+t+'</option>';}return h;}
 function addManualCandidate(){
-  var d=el('mc-date'),hr=el('mc-hour');if(!d||!d.value){setHtml('mc-msg','<div class="msg msg-error">日付を選択してください。</div>');return;}
-  var iso=d.value+'T'+pad2(parseInt(hr.value,10))+':00:00';
+  var d=el('mc-date'),tm=el('mc-time');if(!d||!d.value){setHtml('mc-msg','<div class="msg msg-error">日付を選択してください。</div>');return;}
+  if(!/^\d{2}:\d{2}$/.test(tm.value)){setHtml('mc-msg','<div class="msg msg-error">開始時刻を選択してください。</div>');return;}
+  var iso=d.value+'T'+tm.value+':00';
   if(gManualCandidates.some(function(c){return c.iso===iso;})){setHtml('mc-msg','<div class="msg msg-error">同じ日時が既に追加されています。</div>');return;}
-  gManualCandidates.push({label:isoToJp(iso),iso:iso});setHtml('mc-msg','');renderManualCandidateList_();
+  gManualCandidates.push({label:isoToJp(iso),iso:iso});gManualCandidates.sort(function(a,b){return a.iso<b.iso?-1:a.iso>b.iso?1:0;});setHtml('mc-msg','');renderManualCandidateList_();
 }
 function removeManualCandidate(idx){gManualCandidates.splice(idx,1);renderManualCandidateList_();}
 function renderManualCandidateList_(){
