@@ -1547,7 +1547,7 @@ function rollbackVip(vipNum){
 /* ===== Overlap ===== */
 function renderOverlapArea(data){
   var ov=data.overlap||[];var vc=parseInt(data.cfg.vip_count||'0',10);var vs=data.vipSlots||{};
-  if(vc===0){el('a-overlap-area').innerHTML=buildManualCandidateForm_();return;}
+  if(vc===0){el('a-overlap-area').innerHTML=buildManualCandidateForm_(data.cfg);renderManualCandidateList_();return;}
   var allR=true;for(var i=1;i<=vc;i++){if(!(vs['vip_'+i]||[]).length){allR=false;break;}}
   if(!allR){el('a-overlap-area').innerHTML='<div class="info-box info-box-amber"><h3>\u307e\u3060\u5168\u30b3\u30a2\u53c2\u52a0\u8005\u306e\u56de\u7b54\u304c\u63c3\u3063\u3066\u3044\u307e\u305b\u3093</h3><p>\u5168\u3066\u306e\u30b3\u30a2\u53c2\u52a0\u8005\u304c\u56de\u7b54\u3057\u3066\u304b\u3089\u5019\u88dc\u3092\u9078\u3093\u3067\u304f\u3060\u3055\u3044\u3002</p></div>';return;}
   if(ov.length===0){el('a-overlap-area').innerHTML='<div class="info-box info-box-amber"><h3>\u5171\u901a\u306e\u7a7a\u304d\u6642\u9593\u304c\u3042\u308a\u307e\u305b\u3093</h3><p>\u671f\u9593\u3092\u5909\u66f4\u3059\u308b\u304b\u518d\u8abf\u6574\u3057\u3066\u304f\u3060\u3055\u3044\u3002</p></div>';return;}
@@ -1560,29 +1560,95 @@ function setCandidates(){var ck=document.querySelectorAll('.overlap-chk:checked'
 
 /* ===== Manual candidate entry (VIP=0) ===== */
 var gManualCandidates=[];
-function buildManualCandidateForm_(){
-  return '<div class="info-box info-box-blue"><h3>候補日時を追加してください</h3><p>コア参加者なしの構成です。候補日時を直接入力して投票者に打診できます。</p></div>'+
-    '<div class="form-inline" style="margin:14px 0"><div class="form-row mb-0"><label>日付</label><input type="date" id="mc-date"></div>'+
+/* コア参加者 0 名の候補確定。カレンダー（日付 × 枠）をクリックして選ぶ方法と、1 件ずつ追加する方法の 2 通り。
+   初期値は「① 準備・設定」の候補日・時間帯から取る（2026-10-29 追加。それまでは 1 件ずつの追加のみ） */
+function buildManualCandidateForm_(cfg){
+  cfg=cfg||{};
+  var dates=candDefaultDates_(cfg);
+  var sh=pad2(parseInt(cfg.cal_start_hour||9,10))+':00',eh=pad2(parseInt(cfg.cal_end_hour||18,10))+':00';
+  var dur=String(cfg.meeting_duration||'30');
+  return '<div class="info-box info-box-blue"><h3>候補日時を選んでください</h3><p>コア参加者なしの構成です。カレンダーの枠をクリックして候補を選ぶか、日時を 1 件ずつ追加して、投票者に打診します。</p></div>'+
+    '<div class="section-title" style="margin-top:14px">カレンダーから選ぶ</div>'+
+    '<div class="form-inline" style="margin:8px 0;flex-wrap:wrap">'+
+    '<div class="form-row mb-0"><label>開始日</label><input type="date" id="mc-cal-start" value="'+esc(dates.start)+'"></div>'+
+    '<div class="form-row mb-0"><label>終了日</label><input type="date" id="mc-cal-end" value="'+esc(dates.end)+'"></div>'+
+    '<div class="form-row mb-0"><label>表示する時間帯</label><div style="display:flex;gap:6px;align-items:center"><select id="mc-cal-sh" style="min-width:92px">'+buildTimeOptions_(6,22,30,sh)+'</select><span>〜</span><select id="mc-cal-eh" style="min-width:92px">'+buildTimeOptions_(6,22,30,eh)+'</select></div></div>'+
+    '<div class="form-row mb-0"><label>枠の長さ</label><select id="mc-dur">'+[30,60,90,120].map(function(m){return '<option value="'+m+'"'+(String(m)===dur?' selected':'')+'>'+m+' 分</option>';}).join('')+'</select></div>'+
+    '<div class="form-row mb-0"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:6px;font-weight:normal"><input type="checkbox" id="mc-skip-weekend" checked> 土日を省く</label></div>'+
+    '<button class="btn btn-outline btn-sm" onclick="renderCandGrid_()" style="margin-top:18px">カレンダーを表示</button></div>'+
+    '<div id="mc-grid"></div>'+
+    '<div class="section-title" style="margin-top:18px">1 件ずつ追加する</div>'+
+    '<div class="form-inline" style="margin:8px 0"><div class="form-row mb-0"><label>日付</label><input type="date" id="mc-date"></div>'+
     '<div class="form-row mb-0"><label>開始時刻</label><select id="mc-time">'+buildTimeOptions_(8,20,30,'10:00')+'</select></div>'+
     '<button class="btn btn-outline btn-sm" onclick="addManualCandidate()" style="margin-top:18px">＋ 追加</button></div>'+
+    '<div class="section-title" style="margin-top:18px">選んだ候補 <span id="mc-count" class="text-sm text-muted" style="font-weight:normal"></span></div>'+
     '<div id="mc-list" class="overlap-list"></div>'+
     '<div id="mc-msg"></div>';
 }
 /* 開始時刻の選択肢。from 時〜to 時を stepMin 分刻み（30 分枠の照会にも使えるよう 2026-10-29 に 1 時間刻みから変更） */
 function buildTimeOptions_(from,to,stepMin,selected){var h='';for(var m=from*60;m<=to*60;m+=stepMin){var t=pad2(Math.floor(m/60))+':'+pad2(m%60);h+='<option value="'+t+'"'+(t===selected?' selected':'')+'>'+t+'</option>';}return h;}
+/* カレンダーの初期の日付範囲：準備・設定の期間、または個別指定日の最小〜最大。無ければ今日から 2 週間 */
+function candDefaultDates_(cfg){
+  var sd=cfg.specific_dates;if(typeof sd==='string'){try{sd=JSON.parse(sd||'[]');}catch(e){sd=[];}}
+  if(Array.isArray(sd)&&sd.length){var ss=sd.map(String).sort();return {start:ss[0].slice(0,10),end:ss[ss.length-1].slice(0,10)};}
+  if(cfg.cal_start&&cfg.cal_end)return {start:String(cfg.cal_start).slice(0,10),end:String(cfg.cal_end).slice(0,10)};
+  var t=new Date(),u=new Date();u.setDate(u.getDate()+14);
+  return {start:toYmd_(t),end:toYmd_(u)};
+}
+function toYmd_(d){return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
+function hmToMin_(v){var m=/^(\d{2}):(\d{2})$/.exec(v||'');return m?parseInt(m[1],10)*60+parseInt(m[2],10):NaN;}
+/* 日付 × 枠の表。選択済みの枠は cal-selected。クリックで toggleCandSlot */
+function buildCandGrid_(days,startMin,endMin,dur,selectedIsos){
+  var slots=[];for(var mm=startMin;mm+dur<=endMin;mm+=dur)slots.push(mm);
+  if(!days.length)return '<p class="text-muted">表示できる日がありません。開始日と終了日を確認してください。</p>';
+  if(!slots.length)return '<p class="text-muted">時間帯が枠の長さより短いため、枠を作れません。</p>';
+  var JP=['日','月','火','水','木','金','土'];
+  var h='<div class="cal-wrap"><table class="cal-table"><thead><tr><th class="cal-time-th"></th>';
+  days.forEach(function(d){h+='<th class="cal-day-th">'+(d.getMonth()+1)+'/'+d.getDate()+'<br>('+JP[d.getDay()]+')</th>';});
+  h+='</tr></thead><tbody>';
+  slots.forEach(function(mm){var hh=Math.floor(mm/60),mi=mm%60;h+='<tr><td class="cal-time-td">'+pad2(hh)+':'+pad2(mi)+'</td>';
+    days.forEach(function(d){var iso=toYmd_(d)+'T'+pad2(hh)+':'+pad2(mi)+':00';var sel=selectedIsos.indexOf(iso)>=0;
+      h+='<td class="cal-slot'+(sel?' cal-selected':'')+'" data-iso="'+iso+'" onclick="toggleCandSlot(this)"></td>';});
+    h+='</tr>';});
+  return h+'</tbody></table></div><p class="text-sm text-muted">クリックで候補に追加、もう一度クリックで外します。</p>';
+}
+function renderCandGrid_(){
+  var st=(el('mc-cal-start')||{}).value||'',en=(el('mc-cal-end')||{}).value||'';
+  if(!st||!en||st>en){setHtml('mc-grid','<div class="msg msg-error">開始日と終了日を正しく指定してください。</div>');return;}
+  var sm=hmToMin_((el('mc-cal-sh')||{}).value),em=hmToMin_((el('mc-cal-eh')||{}).value);
+  if(isNaN(sm)||isNaN(em)||sm>=em){setHtml('mc-grid','<div class="msg msg-error">表示する時間帯は開始が終了より前になるように指定してください。</div>');return;}
+  var dur=parseInt((el('mc-dur')||{}).value||'30',10);var skip=!!((el('mc-skip-weekend')||{}).checked);
+  var days=getWeekdays(st,en).filter(function(d){return !(skip&&(d.getDay()===0||d.getDay()===6));});
+  if(days.length>62){setHtml('mc-grid','<div class="msg msg-error">期間が長すぎます（最大 2 か月）。範囲を狭めてください。</div>');return;}
+  setHtml('mc-grid',buildCandGrid_(days,sm,em,dur,gManualCandidates.map(function(c){return c.iso;})));
+}
+function toggleCandSlot(cell){
+  var iso=cell.getAttribute('data-iso');var idx=-1;
+  gManualCandidates.forEach(function(c,i){if(c.iso===iso)idx=i;});
+  if(idx>=0){gManualCandidates.splice(idx,1);cell.classList.remove('cal-selected');}
+  else{gManualCandidates.push({label:isoToJp(iso),iso:iso});cell.classList.add('cal-selected');}
+  sortManualCandidates_();setHtml('mc-msg','');renderManualCandidateList_();
+}
+function sortManualCandidates_(){gManualCandidates.sort(function(a,b){return a.iso<b.iso?-1:a.iso>b.iso?1:0;});}
 function addManualCandidate(){
   var d=el('mc-date'),tm=el('mc-time');if(!d||!d.value){setHtml('mc-msg','<div class="msg msg-error">日付を選択してください。</div>');return;}
   if(!/^\d{2}:\d{2}$/.test(tm.value)){setHtml('mc-msg','<div class="msg msg-error">開始時刻を選択してください。</div>');return;}
   var iso=d.value+'T'+tm.value+':00';
   if(gManualCandidates.some(function(c){return c.iso===iso;})){setHtml('mc-msg','<div class="msg msg-error">同じ日時が既に追加されています。</div>');return;}
-  gManualCandidates.push({label:isoToJp(iso),iso:iso});gManualCandidates.sort(function(a,b){return a.iso<b.iso?-1:a.iso>b.iso?1:0;});setHtml('mc-msg','');renderManualCandidateList_();
+  gManualCandidates.push({label:isoToJp(iso),iso:iso});sortManualCandidates_();setHtml('mc-msg','');renderManualCandidateList_();
+  var cell=document.querySelector('#mc-grid .cal-slot[data-iso="'+iso+'"]');if(cell)cell.classList.add('cal-selected');
 }
-function removeManualCandidate(idx){gManualCandidates.splice(idx,1);renderManualCandidateList_();}
+function removeManualCandidate(idx){
+  var iso=(gManualCandidates[idx]||{}).iso;gManualCandidates.splice(idx,1);renderManualCandidateList_();
+  var cell=iso?document.querySelector('#mc-grid .cal-slot[data-iso="'+iso+'"]'):null;if(cell)cell.classList.remove('cal-selected');
+}
 function renderManualCandidateList_(){
   var le=el('mc-list');if(!le)return;
+  var cnt=el('mc-count');if(cnt)cnt.textContent=gManualCandidates.length?'（'+gManualCandidates.length+' 件）':'';
   if(gManualCandidates.length===0){le.innerHTML='<p class="text-sm text-muted">まだ候補がありません。</p>';return;}
   le.innerHTML=gManualCandidates.map(function(c,i){return '<div class="overlap-item" style="cursor:default"><span style="flex:1">'+esc(c.label)+'</span><button class="btn btn-sm" style="background:var(--red-lt);color:var(--red)" onclick="removeManualCandidate('+i+')">×</button></div>';}).join('');
 }
+
 function setManualCandidates(){
   if(gManualCandidates.length===0){setHtml('a-cand-msg','<div class="msg msg-error">少なくとも1つ候補を追加してください。</div>');return;}
   if(!confirm('以下を候補として確定しますか？\n'+gManualCandidates.map(function(c){return'・'+c.label;}).join('\n')))return;
