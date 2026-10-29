@@ -1125,6 +1125,12 @@ function renderDynamicTabs(vc,vipParts){
   h+='<div class="table-wrap"><table class="p-table"><thead><tr><th style="width:120px">\u5f79\u5272</th><th>\u6c0f\u540d</th><th>\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9</th><th style="width:36px"></th></tr></thead><tbody id="a-p-tbody"></tbody></table></div>';
   h+='<button class="btn btn-outline btn-sm mt-4" onclick="addParticipantRow()">\uff0b \u53c2\u52a0\u8005\u3092\u8ffd\u52a0</button>';
   h+='<div id="a-setup-msg"></div><div class="mt-4"><button class="btn btn-primary" onclick="saveSetup()">\u8a2d\u5b9a\u3092\u4fdd\u5b58\u3059\u308b</button></div>';
+  if(vc===0){
+    /* コア参加者 0 名: 候補日・時間帯はコア参加者のカレンダー用なので、ここでは入力させず候補確定へ誘導する（2026-10-29） */
+    h+='<hr class="divider"><div class="section-title">候補日・時間帯</div>';
+    h+='<div class="info-box info-box-blue"><p style="margin:0">この会議はコア参加者がいないので、候補の日付と時間帯は <b>「候補確定」タブのカレンダー</b> で直接選びます。ここで設定するものはありません。</p></div>';
+    h+='<div class="mt-4"><button class="btn btn-outline btn-sm" onclick="showTab(\'candidates\')">候補確定タブへ →</button></div>';
+  } else {
   h+='<hr class="divider"><div class="section-title">候補日・時間帯の設定</div>';
   /* 日程指定モード */
   h+='<div class="form-row"><label>日程の指定方法</label><div style="display:flex;gap:16px;margin-top:4px"><label style="font-weight:normal;cursor:pointer"><input type="radio" name="a-date-mode" value="range" checked onchange="toggleDateMode()"> 期間で指定</label><label style="font-weight:normal;cursor:pointer"><input type="radio" name="a-date-mode" value="specific" onchange="toggleDateMode()"> 日付を個別に指定</label></div></div>';
@@ -1138,6 +1144,7 @@ function renderDynamicTabs(vc,vipParts){
   /* 所要時間 */
   h+='<div class="form-row" style="margin-top:14px"><label>会議の所要時間</label><select id="a-duration" style="max-width:180px"><option value="30">30分</option><option value="45">45分</option><option value="60" selected>1時間</option><option value="75">1時間15分</option><option value="90">1時間30分</option><option value="105">1時間45分</option><option value="120">2時間</option><option value="150">2時間30分</option><option value="180">3時間</option></select></div>';
   h+='<div class="mt-4"><button class="btn btn-primary" onclick="savePeriod()">候補日・時間帯を保存する</button></div><div id="a-prof-msg" style="margin-top:8px"></div>';
+  }
   h+='</div>';
   /* VIP tabs */
   for(var v=1;v<=vc;v++){h+='<div id="tab-vip_'+v+'" class="tab-content">'+buildVipTabHtml(v,vipParts[v-1]||null,vipParts[v-2]||null,vc)+'</div>';}
